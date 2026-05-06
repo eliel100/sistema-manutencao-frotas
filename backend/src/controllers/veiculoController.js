@@ -60,7 +60,23 @@ const deletarVeiculo = async (req, res) => {
       return res.status(404).json({ error: 'Veículo não encontrado' });
     }
 
+    const { Manutencao } = require('../models');
+
+    const manutencaoVinculada = await Manutencao.findOne({
+      where: {
+        veiculo_id: req.params.id,
+      },
+    });
+
+    if (manutencaoVinculada) {
+      return res.status(400).json({
+        error:
+          'Não é possível excluir este veículo, pois ele possui manutenções cadastradas.',
+      });
+    }
+
     await veiculo.destroy();
+
     res.json({ message: 'Veículo deletado com sucesso' });
   } catch (error) {
     res.status(500).json({ error: 'Erro ao deletar veículo' });

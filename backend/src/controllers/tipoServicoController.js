@@ -60,7 +60,23 @@ const deletarTipoServico = async (req, res) => {
       return res.status(404).json({ error: 'Tipo de serviço não encontrado' });
     }
 
+    const { Manutencao } = require('../models');
+
+    const manutencaoVinculada = await Manutencao.findOne({
+      where: {
+        tipo_servico_id: req.params.id,
+      },
+    });
+
+    if (manutencaoVinculada) {
+      return res.status(400).json({
+        error:
+          'Não é possível excluir este tipo de serviço, pois ele possui manutenções cadastradas.',
+      });
+    }
+
     await tipo.destroy();
+
     res.json({ message: 'Tipo de serviço deletado com sucesso' });
   } catch (error) {
     res.status(500).json({ error: 'Erro ao deletar tipo de serviço' });
