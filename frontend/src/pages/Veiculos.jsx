@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
 import api from '../services/api';
+import { useAuth } from '../context/AuthContext';
 
 function Veiculos() {
+  const { usuario } = useAuth();
+
   const [veiculos, setVeiculos] = useState([]);
 
   const [idEditando, setIdEditando] = useState(null);
@@ -216,12 +219,14 @@ function Veiculos() {
                         Editar
                       </button>
 
-                      <button
-                        className="btn btn-danger btn-sm"
-                        onClick={() => excluirVeiculo(veiculo.id)}
-                      >
-                        Excluir
-                      </button>
+                      {usuario?.tipo === 'admin' && (
+  <button
+    className="btn btn-danger btn-sm"
+    onClick={() => excluirVeiculo(veiculo.id)}
+  >
+    Excluir
+  </button>
+)}
                     </td>
                   </tr>
                 ))}

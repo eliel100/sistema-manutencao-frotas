@@ -1,12 +1,14 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Navbar from './components/Navbar';
+import ProtectedRoute from './components/ProtectedRoute';
 
 import Home from './pages/Home';
+import Login from './pages/Login';
 import Veiculos from './pages/Veiculos';
 import TiposServico from './pages/TiposServico';
 import Manutencoes from './pages/Manutencoes';
-import Login from './pages/Login';
+import MeuPerfil from './pages/MeuPerfil';
 
 function App() {
   return (
@@ -19,17 +21,40 @@ function App() {
 
           <Route path="/login" element={<Login />} />
 
-          <Route path="/veiculos" element={<Veiculos />} />
+          <Route
+            path="/veiculos"
+            element={
+              <ProtectedRoute>
+                <Veiculos />
+              </ProtectedRoute>
+            }
+          />
 
           <Route
             path="/tipos-servico"
-            element={<TiposServico />}
+            element={
+              <ProtectedRoute>
+                <TiposServico />
+              </ProtectedRoute>
+            }
           />
 
           <Route
             path="/manutencoes"
-            element={<Manutencoes />}
+            element={
+              <ProtectedRoute>
+                <Manutencoes />
+              </ProtectedRoute>
+            }
           />
+         <Route
+  path="/meu-perfil"
+  element={
+    <ProtectedRoute>
+      <MeuPerfil />
+    </ProtectedRoute>
+  }
+/>
         </Routes>
       </main>
     </BrowserRouter>

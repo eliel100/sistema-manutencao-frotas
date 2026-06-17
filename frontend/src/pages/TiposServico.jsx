@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
 import api from '../services/api';
+import { useAuth } from '../context/AuthContext';
 
 function TiposServico() {
+  const { usuario } = useAuth();
+
   const [tiposServico, setTiposServico] = useState([]);
 
   const [idEditando, setIdEditando] = useState(null);
@@ -157,12 +160,14 @@ function TiposServico() {
                         Editar
                       </button>
 
-                      <button
-                        className="btn btn-danger btn-sm"
-                        onClick={() => excluirTipoServico(tipoServico.id)}
-                      >
-                        Excluir
-                      </button>
+                      {usuario?.tipo === 'admin' && (
+  <button
+    className="btn btn-danger btn-sm"
+    onClick={() => excluirTipoServico(tipoServico.id)}
+  >
+    Excluir
+  </button>
+)}
                     </td>
                   </tr>
                 ))}

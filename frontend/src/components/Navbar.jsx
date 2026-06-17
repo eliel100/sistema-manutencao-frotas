@@ -13,6 +13,7 @@ function Navbar() {
         </Link>
 
         <div className="navbar-nav">
+
           <Link className="nav-link" to="/veiculos">
             Veículos
           </Link>
@@ -33,9 +34,12 @@ function Navbar() {
 
           {usuario && (
             <>
-              <span className="nav-link text-info">
+              <Link
+                className="nav-link text-info"
+                to="/meu-perfil"
+              >
                 {usuario.nome}
-              </span>
+              </Link>
 
               <button
                 className="btn btn-sm btn-outline-light ms-2"
@@ -45,6 +49,7 @@ function Navbar() {
               </button>
             </>
           )}
+
         </div>
       </div>
     </nav>

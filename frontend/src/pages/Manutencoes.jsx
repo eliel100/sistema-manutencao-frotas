@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import api from '../services/api';
+import { useAuth } from '../context/AuthContext';
 
 function Manutencoes() {
   const [manutencoes, setManutencoes] = useState([]);
   const [veiculos, setVeiculos] = useState([]);
   const [tiposServico, setTiposServico] = useState([]);
+
 
   const [idEditando, setIdEditando] = useState(null);
   const [veiculoId, setVeiculoId] = useState('');
@@ -13,6 +15,7 @@ function Manutencoes() {
   const [descricao, setDescricao] = useState('');
   const [valor, setValor] = useState('');
   const [quilometragem, setQuilometragem] = useState('');
+    const { usuario } = useAuth();
 
   async function carregarDados() {
     try {
@@ -255,12 +258,14 @@ function Manutencoes() {
                         Editar
                       </button>
 
-                      <button
-                        className="btn btn-danger btn-sm"
-                        onClick={() => excluirManutencao(manutencao.id)}
-                      >
-                        Excluir
-                      </button>
+                      {usuario?.tipo === 'admin' && (
+  <button
+    className="btn btn-danger btn-sm"
+    onClick={() => excluirManutencao(manutencao.id)}
+  >
+    Excluir
+  </button>
+)}
                     </td>
                   </tr>
                 ))}
