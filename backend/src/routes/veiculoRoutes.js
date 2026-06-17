@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
+const auth = require('../middlewares/auth');
+const admin = require('../middlewares/admin');
+
 const {
   listarVeiculos,
   buscarVeiculo,
@@ -9,10 +12,12 @@ const {
   deletarVeiculo,
 } = require('../controllers/veiculoController');
 
-router.get('/veiculos', listarVeiculos);
-router.get('/veiculos/:id', buscarVeiculo);
-router.post('/veiculos', criarVeiculo);
-router.put('/veiculos/:id', atualizarVeiculo);
-router.delete('/veiculos/:id', deletarVeiculo);
+router.get('/veiculos', auth, listarVeiculos);
+router.get('/veiculos/:id', auth, buscarVeiculo);
+router.post('/veiculos', auth, criarVeiculo);
+router.put('/veiculos/:id', auth, atualizarVeiculo);
+
+// Somente administrador pode excluir
+router.delete('/veiculos/:id', auth, admin, deletarVeiculo);
 
 module.exports = router;

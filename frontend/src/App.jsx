@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import Veiculos from './pages/Veiculos';
 import TiposServico from './pages/TiposServico';
 import Manutencoes from './pages/Manutencoes';
+import Login from './pages/Login';
 
 function App() {
   return (
@@ -16,11 +17,19 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
 
+          <Route path="/login" element={<Login />} />
+
           <Route path="/veiculos" element={<Veiculos />} />
 
-          <Route path="/tipos-servico" element={<TiposServico />} />
+          <Route
+            path="/tipos-servico"
+            element={<TiposServico />}
+          />
 
-          <Route path="/manutencoes" element={<Manutencoes />} />
+          <Route
+            path="/manutencoes"
+            element={<Manutencoes />}
+          />
         </Routes>
       </main>
     </BrowserRouter>

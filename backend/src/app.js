@@ -4,9 +4,11 @@ require('dotenv').config();
 
 const { sequelize } = require('./models');
 
+const authRoutes = require('./routes/authRoutes');
 const veiculoRoutes = require('./routes/veiculoRoutes');
 const tipoServicoRoutes = require('./routes/tipoServicoRoutes');
 const manutencaoRoutes = require('./routes/manutencaoRoutes');
+const usuarioRoutes = require('./routes/usuarioRoutes');
 
 const app = express();
 
@@ -16,6 +18,8 @@ app.use(express.json());
 app.use(veiculoRoutes);
 app.use(tipoServicoRoutes);
 app.use(manutencaoRoutes);
+app.use(usuarioRoutes);
+app.use(authRoutes);
 
 app.get('/', (req, res) => {
   res.json({ message: 'API funcionando 🚀' });

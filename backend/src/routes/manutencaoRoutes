@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
+const auth = require('../middlewares/auth');
+const admin = require('../middlewares/admin');
+
 const {
   listarManutencoes,
   buscarManutencao,
@@ -9,10 +12,12 @@ const {
   deletarManutencao,
 } = require('../controllers/manutencaoController');
 
-router.get('/manutencoes', listarManutencoes);
-router.get('/manutencoes/:id', buscarManutencao);
-router.post('/manutencoes', criarManutencao);
-router.put('/manutencoes/:id', atualizarManutencao);
-router.delete('/manutencoes/:id', deletarManutencao);
+router.get('/manutencoes', auth, listarManutencoes);
+router.get('/manutencoes/:id', auth, buscarManutencao);
+router.post('/manutencoes', auth, criarManutencao);
+router.put('/manutencoes/:id', auth, atualizarManutencao);
+
+// Somente administrador pode excluir
+router.delete('/manutencoes/:id', auth, admin, deletarManutencao);
 
 module.exports = router;
