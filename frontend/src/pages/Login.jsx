@@ -82,6 +82,10 @@ function Login() {
               >
                 Entrar
               </button>
+              <p className="text-center mt-3">
+  Não tem conta?{' '}
+  <a href="/cadastro">Criar conta</a>
+</p>
             </form>
           </div>
         </div>

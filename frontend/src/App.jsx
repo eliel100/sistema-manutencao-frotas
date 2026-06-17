@@ -5,6 +5,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 
 import Home from './pages/Home';
 import Login from './pages/Login';
+import Cadastro from './pages/Cadastro';
 import Veiculos from './pages/Veiculos';
 import TiposServico from './pages/TiposServico';
 import Manutencoes from './pages/Manutencoes';
@@ -17,10 +18,16 @@ function App() {
 
       <main className="container mt-4">
         <Routes>
+          {/* Página inicial */}
           <Route path="/" element={<Home />} />
 
+          {/* Login */}
           <Route path="/login" element={<Login />} />
 
+          {/* Cadastro (FALTAVA ISSO) */}
+          <Route path="/cadastro" element={<Cadastro />} />
+
+          {/* Rotas protegidas */}
           <Route
             path="/veiculos"
             element={
@@ -47,14 +54,15 @@ function App() {
               </ProtectedRoute>
             }
           />
-         <Route
-  path="/meu-perfil"
-  element={
-    <ProtectedRoute>
-      <MeuPerfil />
-    </ProtectedRoute>
-  }
-/>
+
+          <Route
+            path="/meu-perfil"
+            element={
+              <ProtectedRoute>
+                <MeuPerfil />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </main>
     </BrowserRouter>
